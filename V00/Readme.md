@@ -29,8 +29,7 @@ Axel est un personnage solitaire qui cherche à comprendre la vérité derrière
 
 Axel reçoit un message secret provenant de **Cipher**, une entité mystérieuse.
 Il apprend que Nexus prépare le **Protocole Obscura**, un programme qui supprimera définitivement le libre arbitre des citoyens.
- Parfait 👍
-Voici une **version simplifiée du README**, adaptée à un **rendu scolaire** : claire, courte, sans jargon inutile, tout en restant sérieuse.
+
 
 ---
 
@@ -104,13 +103,6 @@ Le projet aborde :
 
 > *« L’outil est neutre ; c’est l’intention qui le définit. »*
 
----
-
-Si tu veux, je peux encore :
-
-* le **raccourcir à une seule page**
-* l’adapter pour une **présentation orale**
-* ou le reformuler pour un **niveau collège / lycée précis** 📘✨
 
 ---
 
