@@ -11,6 +11,7 @@ class Player :
         """
         self.name = name
         self.current_room = None  # La pièce actuelle du joueur
+        self.previous_room = None  # La pièce précédente du joueur
         self.inventory = []  # Inventaire du joueur
 
     #Definition de la méthode pour déplacer le joueur
@@ -31,6 +32,7 @@ class Player :
         
         #Déplacer le joueur vers la pièce suivante
         if next_room:
+            self.previous_room = self.current_room
             self.current_room = next_room
             self.current_room.describe()
         return True

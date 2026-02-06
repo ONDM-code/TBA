@@ -16,3 +16,7 @@ class Item:
         Retourne une représentation textuelle de l'objet.
         """
         return f"{self.name}: {self.description}"
+
+# Il peut aussi avoir un poids et interagir avec le monde ( TBA et/ou le joueur ) 
+# 1. Ajouter des objets inerte ( livre , chaise ...)
+# 2. Ajouter des objets interactif ( potion de soin , arme ... )

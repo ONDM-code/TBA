@@ -30,10 +30,14 @@ class Game:
         self.cmd["help"] = help
         quit = Command("quit",":Quitter le jeu",Actions.quit,0)
         self.cmd["quit"] = quit
-        # take = Command("take",":Prendre un objet",Actions.take,1)
-        # self.cmd["take"] = take
-        # inventory = Command("inventory",":Afficher l'inventaire",Actions.inventory,0)
-        # self.cmd["inventory"] = inventory
+        take = Command("take",":Prendre un objet",Actions.take,1)
+        self.cmd["take"] = take
+        inventory = Command("inventory",":Afficher l'inventaire",Actions.inventory,0)
+        self.cmd["inventory"] = inventory
+        back = Command("back",":Revenir à la pièce précédente",Actions.back,0)
+        self.cmd["back"] = back
+        use = Command("use",":Utiliser un objet",Actions.use,1)
+        self.cmd["use"] = use
 
 
         # Setup des pièces
@@ -93,8 +97,9 @@ class Game:
         refuge_oublie.exits = {"E":tours_corporatives,"N":None,"S":None,"O":None}
         usine_recyclage.exits = {"N":ruelles,"E":None,"O":None,"S":None}
 
-        # # Ajout d'objets dans les pièces
-        # appart.items.append(Item("clé USB", "Une clé USB contenant des données cryptées."))
+        # Ajout d'objets dans les pièces
+        appart.items.append(Item(name = "Chaise", description = "Une chaise en métal rouillée."))
+        appart.items.append(Item("clé USB", "Une clé USB contenant des données cryptées."))
         # appart.items.append(Item("terminal", "Un terminal de hacking portable."))
         # marche_noir.items.append(Item("carte d'accès", "Une carte d'accès volée permettant d'entrer dans certaines zones."))
         # serveur.items.append(Item("disque dur", "Un vieux disque dur contenant des archives."))
