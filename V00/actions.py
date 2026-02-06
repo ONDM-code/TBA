@@ -138,15 +138,15 @@ class Actions :
         """
         l = len(words)
 
-        # Vérifier le nombre de paramètres , sinon  afficher un message d'erreur
-        if l != parameters + 1:
-            cmd = words[0]
+        cmd = words[0]
+
+        if words[0] != "help":
             print(M0.format(cmd = cmd))
             return False
-        
-        if words[0] != "help":
-            cmd = words[0]
-            print(M0.format(cmd = cmd))
+
+        # Autoriser "help" seul ou avec une commande
+        if l not in (1, 2):
+            print(M1.format(cmd = cmd))
             return False
         
         # Afficher le message d'aide approprié
@@ -159,6 +159,9 @@ class Actions :
         - inventory : Afficher votre inventaire.
         - quit : Quitter le jeu.
         - help : Afficher ce message d'aide.
+        - back : Revenir à la pièce précédente.
+        - use <objet> : Utiliser un objet de votre inventaire.
+        Tapez 'help <commande>' pour plus de détails sur une commande spécifique.
         """
             print(help_message)
         elif l == 2:
@@ -183,6 +186,49 @@ class Actions :
                 return False
         
         return True
+    
+    @staticmethod
+    def back (game,words,parameters):
+        """
+        Permet au joueur de revenir à la pièce précédente.
+
+        Args :
+            game (Game) : Instance du jeu.
+            words (list) : Liste des mots de la commande.
+            parameters (list) : Le nombre de paramètres attendues par la commande.
+
+        Returns :
+            bool : True si le retour est réussi, False sinon.
+
+        Exemples:
+        >>> from game import Game
+        >>> game = Game()
+        >>> game.setup()
+        >>> back(game ,   ['back'] , 0)
+        False
+        >>> back(game ,   ['back' , 'now'] , 0)
+        False
+        >>> back (game ,   ['back'] , 0)
+        True
+
+        """
+        player = game.player
+        l = len(words)
+
+        # Vérifier le nombre de paramètres , sinon  afficher un message d'erreur
+        if l != parameters + 1:
+            cmd = words[0]
+            print(M1.format(cmd = cmd))
+            return False
+        
+        # Vérifier si une pièce précédente existe et y revenir
+        if hasattr(player, 'previous_room') and player.previous_room is not None:
+            player.current_room, player.previous_room = player.previous_room, player.current_room
+            player.current_room.describe()
+            return True
+        
+        print("Aucune pièce précédente à laquelle revenir.")
+        return False
     
     @staticmethod
     def quit (game,words,parameters):
@@ -293,6 +339,38 @@ class Actions :
             print()
 
         return True
+
+    @staticmethod
+    def use(game, words, parameters):
+        """
+        Utiliser un objet de l'inventaire.
+
+        Args :
+            game (Game) : Instance du jeu.
+            words (list) : Liste des mots de la commande.
+            parameters (int) : Le nombre de paramètres attendues par la commande.
+
+        Returns :
+            bool : True si l'objet est utilisé, False sinon.
+        """
+        player = game.player
+        l = len(words)
+
+        # Vérifier le nombre de paramètres
+        if l != parameters + 1:
+            cmd = words[0]
+            print(M1.format(cmd = cmd))
+            return False
+
+        item_name = " ".join(words[1:]).lower()
+
+        for item in player.inventory:
+            if item.name.lower() == item_name:
+                print(f"\nVous utilisez : {item.name}\n{item.description}\n")
+                return True
+
+        print(f"\nVous n'avez pas '{item_name}' dans votre inventaire.\n")
+        return False
 
 
 
